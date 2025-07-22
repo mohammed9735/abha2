@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قائمة المنتجات</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Tahoma", sans-serif;
+      background-color: #f7f9fc;
+      direction: rtl;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .products-container {
+      flex: 1;
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    .products-title {
+      text-align: center;
+      color: #1e3c88;
+      font-size: 28px;
+      margin-bottom: 25px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background-color: #eaeaea;
+    }
+
+    .product-info {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .product-name {
+      font-size: 18px;
+      color: #1e3c88;
+      margin: 5px 0;
+      font-weight: bold;
+    }
+
+    .product-category {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 5px;
+    }
+
+    .product-description {
+      font-size: 14px;
+      color: #777;
+      height: 40px;
+      overflow: hidden;
+    }
+
+    .product-price {
+      font-size: 16px;
+      color: #0a2a66;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .product-stock {
+      font-size: 14px;
+      color: #2954a3;
+    }
+
+    .buy-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #1e3c88;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .buy-btn:hover {
+      background: #2954a3;
+    }
+  </style>
+</head>
+<body>
+
+  {% include 'header.html' %}
+
+  <div class="products-container">
+    <h2 class="products-title">قائمة المنتجات</h2>
+    <div class="products-grid">
+      {% for product in products %}
+      <div class="product-card">
+        {% if product.images.all %}
+          <img src="{{ product.images.first.image.url }}" class="product-image" alt="{{ product.name }}">
+        {% else %}
+          <img src="/static/no-image.png" class="product-image" alt="لا توجد صورة">
+        {% endif %}
+
+        <div class="product-info">
+          <div class="product-name">{{ product.name }}</div>
+          <div class="product-category">{{ product.category.name }}</div>
+          <div class="product-description">{{ product.description|truncatechars:50 }}</div>
+          <div class="product-price">السعر: {{ product.price }} ر.س</div>
+          <div class="product-stock">المخزون: {{ product.stock }} قطعة</div>
+          <a href="#" class="buy-btn">شراء الآن</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% include 'footer.html' %}
+
+  <script>
+    document.querySelectorAll('.buy-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert("تمت إضافة المنتج إلى السلة!");
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+{% include 'header.html' %}
+
+<div class="register-container">
+  <h2 class="register-title">تسجيل حساب جديد</h2>
+  <form method="POST" class="register-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="register-btn">تسجيل</button>
+  </form>
+  <p class="login-link">
+    لديك حساب بالفعل؟ <a href="{% url 'login' %}">تسجيل الدخول</a>
+  </p>
+</div>
+
+{% include 'footer.html' %}
+
+<style>
+  body {
+    font-family: Tahoma, sans-serif;
+    background: linear-gradient(to bottom, #f0f4ff, #e6edff);
+    direction: rtl;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .register-container {
+    background: white;
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    animation: fadeIn 0.6s ease-in-out;
+  }
+
+  .register-title {
+    font-size: 24px;
+    color: #1e3c88;
+    margin-bottom: 20px;
+  }
+
+  .register-form p {
+    text-align: right;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .register-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  .register-btn {
+    width: 100%;
+    background: #1e3c88;
+    color: white;
+    border: none;
+    padding: 10px 0;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+  }
+
+  .register-btn:hover {
+    background: #2954a3;
+  }
+
+  .login-link {
+    font-size: 14px;
+    margin-top: 15px;
+  }
+
+  .login-link a {
+    color: #1e3c88;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .login-link a:hover {
+    text-decoration: underline;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
