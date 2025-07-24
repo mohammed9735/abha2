@@ -4,13 +4,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-
-    # روابط التطبيقات
-    path('products/', include('products.urls')),     # تطبيق المنتجات
-    path('orders/', include('orders.urls')),         # تطبيق الطلبات
-    path('', include('storefront.urls')),            # الصفحة الرئيسية
-    path('accounts/', include('accounts.urls')),     # ✅ تسجيل المستخدمين
+    path('admin/', admin.site.urls),             # لوحة التحكم
+    path('products/', include('products.urls')), # المنتجات
+    path('orders/', include('orders.urls')),     # الطلبات
+    path('', include('storefront.urls')),        # الصفحة الرئيسية (واجهة المتجر)
+    path('accounts/', include('accounts.urls'))  # تسجيل الدخول والتسجيل
 ]
 
 # تفعيل عرض ملفات الوسائط أثناء التطوير

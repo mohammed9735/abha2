@@ -1,0 +1,95 @@
+{% include 'header.html' %}
+
+<div class="cart-container">
+  <h2 class="cart-title">🛒 سلة المشتريات</h2>
+  {% if items %}
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>المنتج</th>
+          <th>الكمية</th>
+          <th>السعر الإجمالي</th>
+          <th>الإجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td>{{ item.product.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.get_total_price }} ر.س</td>
+          <td>
+            <a href="{% url 'decrease_quantity' item.id %}" class="action-btn">➖ تقليل</a>
+            <a href="{% url 'remove_from_cart' item.id %}" class="action-btn remove">❌ حذف</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="cart-total">الإجمالي: {{ total_price }} ر.س</div>
+  {% else %}
+    <p>السلة فارغة حاليا.</p>
+  {% endif %}
+</div>
+
+{% include 'footer.html' %}
+
+<style>
+  .cart-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .cart-title {
+    text-align: center;
+    font-size: 24px;
+    color: #1e3c88;
+    margin-bottom: 20px;
+  }
+
+  .cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  .cart-table th, .cart-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .action-btn {
+    background: #1e3c88;
+    color: white;
+    padding: 5px 8px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 12px;
+    margin: 0 3px;
+    transition: 0.3s;
+  }
+
+  .action-btn:hover {
+    background: #2954a3;
+  }
+
+  .remove {
+    background: #c0392b;
+  }
+
+  .remove:hover {
+    background: #e74c3c;
+  }
+
+  .cart-total {
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    color: #0a2a66;
+  }
+</style>

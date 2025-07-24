@@ -1,7 +1,3 @@
-"""
-Django settings for abha2 project.
-"""
-
 from pathlib import Path
 import os
 
@@ -37,7 +33,7 @@ INSTALLED_APPS = [
     'products',
     'orders',
     'storefront',
-    'accounts',  # ✅ إضافة التطبيق الجديد
+    'accounts',
 ]
 
 # ==============================
@@ -61,7 +57,7 @@ ROOT_URLCONF = 'abha2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],  # مسار القوالب العام
+        'DIRS': [BASE_DIR / "templates"],  # مجلد القوالب العام
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,6 +65,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # ✅ هذا للسلة: يعرض عدد المنتجات بشكل حي في كل الصفحات
+                'storefront.views.cart_item_count',
             ],
         },
     },
@@ -119,11 +118,11 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "media"
 
 # ==============================
+# نموذج المستخدم المخصص (CustomUser)
+# ==============================
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+# ==============================
 # الإعدادات الافتراضية
 # ==============================
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# ==============================
-# إعدادات المستخدم المخصص
-# ==============================
-AUTH_USER_MODEL = 'accounts.CustomUser'

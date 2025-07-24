@@ -1,18 +1,14 @@
 from django.db import models
-from django.conf import settings  # ✅ استبدلنا استيراد User
+from django.conf import settings
 from products.models import Product
 
 class Cart(models.Model):
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,  # ✅ تعديل العلاقة مع المستخدم
-        on_delete=models.CASCADE,
-        related_name="cart",
-        verbose_name="المستخدم"
-    )
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="cart", verbose_name="المستخدم")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="تاريخ الإنشاء")
 
     def __str__(self):
-        return f"عربة {self.user.username}"
+        return f"سلة {self.user.username}"
+
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="items")
@@ -21,3 +17,6 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} × {self.product.name}"
+
+    def get_total_price(self):
+        return self.quantity * self.product.price

@@ -1,7 +1,9 @@
 <header class="main-header">
+  <div class="logo">متجر إلكتروني</div>
   <nav class="nav-bar">
     <a href="/">الرئيسية</a>
     <a href="/products/">المنتجات</a>
+    <a href="/cart/">🛒 السلة ({{ cart_item_count }})</a>
     <a href="#">من نحن</a>
     <a href="#">تواصل معنا</a>
   </nav>
@@ -12,12 +14,16 @@
     background: linear-gradient(90deg, #0a2a66, #1e3c88, #2954a3);
     color: white;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
     font-family: "Tahoma", sans-serif;
   }
-
+  .main-header .logo {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
   .nav-bar a {
     color: white;
     text-decoration: none;
@@ -25,7 +31,6 @@
     font-size: 16px;
     transition: 0.3s;
   }
-
   .nav-bar a:hover {
     color: #f0f0f0;
     text-decoration: underline;
